@@ -1,1 +1,1 @@
-Testing out trigger on DevOPS-2 PR ON DEVELOP
+Testing deletion of branch : develop should not be deleted 
