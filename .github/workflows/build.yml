@@ -29,11 +29,12 @@ jobs:
             ${{ runner.os }}-node-
       - name: Checking current working-directory
         run : pwd
+        working-directory: ${{env.working-directory}}
       - name: Initializing dependencies
         run:  yarn install
     # - name: Initializing env variables
     #  - run: |
-    #          cd ./test-project
+    #          cd ${{env.working-directory}}
     #           echo 'PORT= 3000
     #           REACT_APP_API_URL = 
     #           REACT_APP_FIREBASE_API_KEY = 
