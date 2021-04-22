@@ -21,10 +21,10 @@ jobs:
         id: npm-cache # use this to check for `cache-hit` ==> if: steps.npm-cache.outputs.cache-hit != 'true'
         uses: actions/cache@v2
         with:
-         path: ${{ steps.npm-cache-dir.outputs.dir }}
-         key: ${{ runner.os }}-node-${{ hashFiles('**/yarn-lock.json') }}
-         restore-keys: |
-          ${{ runner.os }}-node-
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Checking current working-directory
         run : pwd
       - name: Initializing dependencies
