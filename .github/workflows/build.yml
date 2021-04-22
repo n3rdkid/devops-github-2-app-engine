@@ -34,7 +34,7 @@ jobs:
         working-directory: ${{env.working-directory}}
       - name: Creating & Initializing env variables 
         run: |
-             cd ~/
+             cd ${{env.working-directory}}
               echo 'PORT= 3000
               REACT_APP_API_URL = ${{secrets.REACT_APP_API_URL}}
               REACT_APP_FIREBASE_API_KEY = ${{secrets.REACT_APP_FIREBASE_API_KEY}}
@@ -47,3 +47,4 @@ jobs:
               SENTRY_DSN = ${{secrets.SENTRY_DSN}}
               REACT_APP_RECAPTCHA_SITE_KEY = ${{secrets.REACT_APP_RECAPTCHA_SITE_KEY}}' > .env
               cat .env
+        working-directory: ${{env.working-directory}}
