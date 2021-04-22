@@ -28,8 +28,10 @@ jobs:
             ${{ runner.os }}-node-
       - name: Checking current working-directory
         run : pwd
+        working-directory: ${{env.working-directory}}
       - name: Initializing dependencies
         run:  yarn install
+        working-directory: ${{env.working-directory}}
       - name: Creating & Initializing env variables 
         run: |
              cd ~/
