@@ -5,8 +5,12 @@ name: Build
 on:
   push:
     branches: [ DEVOPS-*,main,develop ]
+    tags: 
+      - v*
   pull_request:
     branches: [ main,develop ]
+
+    
 
 jobs:
   build:
