@@ -48,3 +48,6 @@ jobs:
               REACT_APP_RECAPTCHA_SITE_KEY = ${{secrets.REACT_APP_RECAPTCHA_SITE_KEY}}' > .env
               cat .env
         working-directory: ${{env.working-directory}}
+      - name: Creating & Initializing env variables 
+        run: yarn build
+        working-directory: ${{env.working-directory}}
