@@ -4,7 +4,7 @@ name: Build
 
 on:
   push:
-    branches: [ DEVOPS-* ]
+    branches: [ DEVOPS-*,main,develop ]
   pull_request:
     branches: [ main,develop ]
 
