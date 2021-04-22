@@ -15,6 +15,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./test-project
     steps:
       - uses: actions/checkout@v2
       - name: Check dependencies in cache 
@@ -31,7 +33,7 @@ jobs:
         run:  yarn install
     # - name: Initializing env variables
     #  - run: |
-    #          cd ./
+    #          cd ./test-project
     #           echo 'PORT= 3000
     #           REACT_APP_API_URL = 
     #           REACT_APP_FIREBASE_API_KEY = 
