@@ -10,13 +10,12 @@ on:
   pull_request:
     branches: [ main,develop ]
 
-    
-
+defaults:
+  run:
+    working-directory: ~/devops-github-2-app-engine
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./test-project
     steps:
       - uses: actions/checkout@v2
       - name: Check dependencies in cache 
@@ -32,18 +31,18 @@ jobs:
         working-directory: ${{env.working-directory}}
       - name: Initializing dependencies
         run:  yarn install
-    # - name: Initializing env variables
-    #  - run: |
-    #          cd ${{env.working-directory}}
-    #           echo 'PORT= 3000
-    #           REACT_APP_API_URL = 
-    #           REACT_APP_FIREBASE_API_KEY = 
-    #           REACT_APP_FIREBASE_AUTH_DOMAIN =
-    #           REACT_APP_FIREBASE_PROJECT_ID = 
-    #           REACT_APP_FIREBASE_STORAGE_BUCKET = 
-    #           REACT_APP_FIREBASE_MESSAGING_SENDER_ID =
-    #           REACT_APP_FIREBASE_APP_ID =
-    #           REACT_APP_FIREBASE_APP_MEASUREMENT_ID =
-    #           SENTRY_DSN = 
-    #           REACT_APP_RECAPTCHA_SITE_KEY = ' > .env
-    #           cat .env
+      - name: Creating & Initializing env variables 
+        run: |
+             cd ${{env.working-directory}}
+              echo 'PORT= 3000
+              REACT_APP_API_URL = ${{secrets.REACT_APP_API_URL}}
+              REACT_APP_FIREBASE_API_KEY = ${{secrets.REACT_APP_FIREBASE_API_KEY}}
+              REACT_APP_FIREBASE_AUTH_DOMAIN =${{secrets.REACT_APP_FIREBASE_AUTH_DOMAIN}}
+              REACT_APP_FIREBASE_PROJECT_ID = ${{secrets.REACT_APP_FIREBASE_PROJECT_ID}}
+              REACT_APP_FIREBASE_STORAGE_BUCKET = ${{secrets.REACT_APP_FIREBASE_STORAGE_BUCKET}}
+              REACT_APP_FIREBASE_MESSAGING_SENDER_ID =${{secrets.REACT_APP_FIREBASE_MESSAGING_SENDER_ID}}
+              REACT_APP_FIREBASE_APP_ID = ${{secrets.REACT_APP_FIREBASE_APP_ID}}
+              REACT_APP_FIREBASE_APP_MEASUREMENT_ID = ${{secrets.REACT_APP_FIREBASE_APP_MEASUREMENT_ID}}
+              SENTRY_DSN = ${{secrets.SENTRY_DSN}}
+              REACT_APP_RECAPTCHA_SITE_KEY = ${{secrets.REACT_APP_RECAPTCHA_SITE_KEY}}' > .env
+              cat .env
