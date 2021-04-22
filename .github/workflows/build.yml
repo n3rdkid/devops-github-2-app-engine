@@ -15,8 +15,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # env:
-    #  working-directory: ./
     steps:
       - uses: actions/checkout@v2
       - name: Check dependencies in cache 
@@ -28,9 +26,9 @@ jobs:
          restore-keys: |
           ${{ runner.os }}-node-
       - name: Checking current working-directory
-      - run : pwd
+        run : pwd
       - name: Initializing dependencies
-      - run:  yarn install
+        run:  yarn install
     # - name: Initializing env variables
     #  - run: |
     #          cd ./
