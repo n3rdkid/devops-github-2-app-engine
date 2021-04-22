@@ -15,8 +15,34 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # env:
+    #  working-directory: ./
     steps:
       - uses: actions/checkout@v2
-      - name: Testing Triggers
-        run: |
-          echo date
+      - name: Check dependencies in cache 
+        id: npm-cache # use this to check for `cache-hit` ==> if: steps.npm-cache.outputs.cache-hit != 'true'
+        uses: actions/cache@v2
+        with:
+         path: ${{ steps.npm-cache-dir.outputs.dir }}
+         key: ${{ runner.os }}-node-${{ hashFiles('**/yarn-lock.json') }}
+         restore-keys: |
+          ${{ runner.os }}-node-
+      - name: Checking current working-directory
+      - run : pwd
+      - name: Initializing dependencies
+      - run:  yarn install
+    # - name: Initializing env variables
+    #  - run: |
+    #          cd ./
+    #           echo 'PORT= 3000
+    #           REACT_APP_API_URL = 
+    #           REACT_APP_FIREBASE_API_KEY = 
+    #           REACT_APP_FIREBASE_AUTH_DOMAIN =
+    #           REACT_APP_FIREBASE_PROJECT_ID = 
+    #           REACT_APP_FIREBASE_STORAGE_BUCKET = 
+    #           REACT_APP_FIREBASE_MESSAGING_SENDER_ID =
+    #           REACT_APP_FIREBASE_APP_ID =
+    #           REACT_APP_FIREBASE_APP_MEASUREMENT_ID =
+    #           SENTRY_DSN = 
+    #           REACT_APP_RECAPTCHA_SITE_KEY = ' > .env
+    #           cat .env
