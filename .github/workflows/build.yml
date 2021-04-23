@@ -51,3 +51,5 @@ jobs:
          export_default_credentials: true
       - name: Use gcloud CLI
         run: gcloud info
+      - name: Deploy to App Engine
+        run: gcloud app deploy app.yaml --quiet --no-promote --version v1
