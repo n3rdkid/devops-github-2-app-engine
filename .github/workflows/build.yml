@@ -41,14 +41,15 @@ jobs:
               SENTRY_DSN = ${{secrets.SENTRY_DSN}}
               REACT_APP_RECAPTCHA_SITE_KEY = ${{secrets.REACT_APP_RECAPTCHA_SITE_KEY}}' > .env
               cat .env
-      - name: Build
-        run: yarn build
-      - name: Deploy to App Engine
-        uses: google-github-actions/deploy-appengine@v0.2.0
+      - name: Initialize Google Cloud SDK   
+        uses: zxyle/publish-gae-action@master
         with:
-          deliverables: app.yaml
-          project_id: ${{ secrets.GCP_PROJECT }}
-          credentials: ${{ secrets.GCP_SA_KEY }}
-          promote: false
-          version: v1
+          service_account_email: ${{ secrets.GCP_SA_EMAIL }}
+          service_account_key: ${{ secrets.GAE_SERIVCE_ACCOUNT }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
 
+      - name: Deploy to Google App engine
+        run: |
+          gcloud auth activate-service-account ${{ secrets.GCP_SA_EMAIL }} --key-file=client-secret.json
+          gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
+          gcloud app deploy app.yaml -q --project ${{secrets.GCP_PROJECT_ID}}
